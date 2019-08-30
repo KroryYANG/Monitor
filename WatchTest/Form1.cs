@@ -141,5 +141,10 @@ namespace WatchTest
             this.fileSystemWatcher1.Path = this.textBox1.Text;     //监测文件夹更改
             MessageBox.Show("目录更改完成");
         }
+
+        private void 说明ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("监视的文件名长度为4，以.xls结尾","说明");
+        }
     }
 }
