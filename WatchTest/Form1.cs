@@ -120,7 +120,7 @@ namespace WatchTest
             }
 
             #region 写日志文件
-            string msg = "文件名:" + e.Name + "成功数:" + success + DateTime.Now;
+            string msg = "文件名:" + e.Name + "成功数:" + success + DateTime.Now.ToString("[yyyy-MM-dd]");
             if(!File.Exists("Log.txt"))
             {
                 FileStream fileStream = new FileStream("Log.txt", FileMode.Create, FileAccess.Write);
