@@ -57,7 +57,7 @@ namespace WatchTest
         //}
 
 
-        private void fileSystemWatcher1_Created(object sender, System.IO.FileSystemEventArgs e)
+        private void fileSystemWatcher1_Created(object sender, FileSystemEventArgs e)
         {
             if (e.Name.IndexOf(".xls") == -1 || e.Name.Length != 8) //要添加.xls文件，文件名长度为4（不计格式）
                 return;
@@ -68,11 +68,11 @@ namespace WatchTest
             OleDbDataAdapter da = new OleDbDataAdapter(sql, objConn); //创建适配对象
             DataTable dt = new DataTable(); //新建表对象
             da.Fill(dt); //用适配对象填充表对象
-            updateSQL(dt);  //写入SQL
+            updateSQL(dt,e);  //写入SQL
         }
 
         //写入SQL
-        private void updateSQL(DataTable dt)
+        private void updateSQL(DataTable dt, FileSystemEventArgs e)
         {
             int rowsCount = dt.Rows.Count;
             SandMix sandMix = new SandMix();
@@ -116,11 +116,11 @@ namespace WatchTest
                     MessageBox.Show(ex.Message);
                     return;
                 }
-               
+              
             }
 
             #region 写日志文件
-            string msg = "成功数:" + success + DateTime.Now;
+            string msg = "文件名:" + e.Name + "成功数:" + success + DateTime.Now;
             if(!File.Exists("Log.txt"))
             {
                 FileStream fileStream = new FileStream("Log.txt", FileMode.Create, FileAccess.Write);
