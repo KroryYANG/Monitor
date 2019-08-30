@@ -83,8 +83,8 @@ namespace WatchTest
 
             for (int i = 0; i < rowsCount; i++)
             {
-
-                sandMixSupp.Time = DateTime.Today; //时间
+                string time = DateTime.Now.ToString("yyyy-MM-dd ") + dt.Rows[i]["Heure"].ToString().Replace('.',':');       
+                sandMixSupp.Time = DateTime.Parse(time);//时间
                 sandMixSupp.Batch = Convert.ToInt32(dt.Rows[i]["N°Cycle"].ToString()); //批次
                 sandMixSupp.SetCompactability = Convert.ToDouble(dt.Rows[i]["ASVisée"].ToString().Replace(',', '.')); //设定紧实率
                 sandMixSupp.SandTem = Convert.ToDouble(dt.Rows[i]["°CSable"].ToString().Replace(',', '.')); //旧沙温度
