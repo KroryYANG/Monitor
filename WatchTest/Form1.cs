@@ -105,7 +105,7 @@ namespace WatchTest
                 try
                 {
                     result = 0;
-                    result = SandMixSuppDAL.AddSandMixSupp(sandMixSupp);
+                    result = SandMixSuppDAL.AddSandMixSupp(sandMixSupp);    //写入数据库
                     if (result == 1)
                     {
                         success++;
@@ -118,9 +118,33 @@ namespace WatchTest
                 }
                
             }
+
+            #region 写日志文件
+            string msg = "成功数:" + success + DateTime.Now;
+            if(!File.Exists("Log.txt"))
+            {
+                FileStream fileStream = new FileStream("Log.txt", FileMode.Create, FileAccess.Write);
+                using (StreamWriter sw = new StreamWriter(fileStream))
+                {
+                    sw.WriteLine(msg);
+                }
+                fileStream.Close();
+            }
+            if (File.Exists("Log.txt"))
+            {
+                FileStream fileStream = new FileStream("Log.txt", FileMode.Append, FileAccess.Write);
+                using (StreamWriter sw = new StreamWriter(fileStream))
+                {
+                    sw.WriteLine(msg);
+                }
+                fileStream.Close();
+            }
+            #endregion
+
             MessageBox.Show("成功数"+success);
 
         }
+      
 
         //更改监视路径
         private void button1_Click(object sender, EventArgs e)
